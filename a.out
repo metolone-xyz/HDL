@@ -1,0 +1,52 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x14fe090c0 .scope module, "adder_tp" "adder_tp" 2 3;
+ .timescale -12 -12;
+P_0x14fe0c170 .param/l "STEP" 0 2 6, +C4<00000000000000000000000001100100>;
+v0x14fe1db80_0 .var "a", 3 0;
+v0x14fe1dc30_0 .var "b", 3 0;
+v0x14fe1dce0_0 .net "q", 3 0, L_0x14fe1ddb0;  1 drivers
+S_0x14fe09230 .scope module, "adder" "adder" 2 8, 3 2 0, S_0x14fe090c0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "q";
+v0x14fe082b0_0 .net "a", 3 0, v0x14fe1db80_0;  1 drivers
+v0x14fe1d9c0_0 .net "b", 3 0, v0x14fe1dc30_0;  1 drivers
+v0x14fe1da70_0 .net "q", 3 0, L_0x14fe1ddb0;  alias, 1 drivers
+L_0x14fe1ddb0 .arith/sum 4, v0x14fe1db80_0, v0x14fe1dc30_0;
+    .scope S_0x14fe090c0;
+T_0 ;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x14fe1db80_0, 0, 4;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x14fe1dc30_0, 0, 4;
+    %delay 100, 0;
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v0x14fe1db80_0, 0, 4;
+    %pushi/vec4 10, 0, 4;
+    %store/vec4 v0x14fe1dc30_0, 0, 4;
+    %delay 100, 0;
+    %vpi_call 2 13 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x14fe090c0;
+T_1 ;
+    %vpi_call 2 16 "$monitor", $time, " a=%d b=%d q=%d", v0x14fe1db80_0, v0x14fe1dc30_0, v0x14fe1dce0_0 {0 0 0};
+    %vpi_call 2 17 "$dumpfile", "4bitadder_tp.vcd" {0 0 0};
+    %vpi_call 2 18 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x14fe090c0 {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "4bitadder_tp.v";
+    "4bitadder.v";
